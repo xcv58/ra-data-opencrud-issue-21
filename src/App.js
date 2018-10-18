@@ -7,13 +7,13 @@ import './App.css';
 const uri = 'https://eu1.prisma.sh/yihong-ed6b25/demo/dev'
 
 export const PostList = (props) => (
-  <List {...props}>
-      <Datagrid>
-          <TextField source="id" />
-          <TextField source="title" />
-          <TextField source="isPublished" />
-          <TextField source="text" />
-      </Datagrid>
+  <List {...props} filter={{ title_in: ["Hello World", "My Second Post"] }}>
+    <Datagrid>
+      <TextField source="id" />
+      <TextField source="title" />
+      <TextField source="isPublished" />
+      <TextField source="text" />
+    </Datagrid>
   </List>
 );
 
