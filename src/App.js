@@ -1,26 +1,48 @@
 import React, { Component } from 'react';
+import buildOpenCrudProvider from 'ra-data-opencrud';
+import { Admin, Resource, Delete, List, Datagrid, TextField } from 'react-admin';
 import logo from './logo.svg';
 import './App.css';
 
+const uri = 'https://eu1.prisma.sh/yihong-ed6b25/demo/dev'
+
+export const PostList = (props) => (
+  <List {...props}>
+      <Datagrid>
+          <TextField source="id" />
+          <TextField source="title" />
+          <TextField source="isPublished" />
+          <TextField source="text" />
+      </Datagrid>
+  </List>
+);
+
 class App extends Component {
+  state = { dataProvider: null }
+
+  componentDidMount() {
+    buildOpenCrudProvider({
+      clientOptions: { uri }
+    }).then(dataProvider => this.setState({ dataProvider }));
+  }
+
   render() {
+    const { dataProvider } = this.state;
+
+    if (!dataProvider) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+          </header>
+        </div>
+      );
+    }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Admin dataProvider={dataProvider}>
+        <Resource name="Post" list={PostList} />
+      </Admin>
     );
   }
 }
