@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import buildOpenCrudProvider from 'ra-data-opencrud';
-import { Admin, Resource, Delete, List, Datagrid, TextField } from 'react-admin';
+import { Admin, Resource, List, Datagrid, TextField } from 'react-admin';
 import logo from './logo.svg';
 import './App.css';
 

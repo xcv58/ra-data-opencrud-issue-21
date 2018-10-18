@@ -11,6 +11,7 @@
     "react-scripts": "2.0.5"
   },
   "scripts": {
+    "postinstall": "sed -i.bak s/_a.key..=.\\{.id_in:.params.filter.key..\\}/_a[key]\\ =\\ params.filter[key]/g node_modules/ra-data-opencrud/dist/buildVariables.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
